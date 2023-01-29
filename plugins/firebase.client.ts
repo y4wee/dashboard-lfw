@@ -9,7 +9,6 @@ export default defineNuxtPlugin(nuxtApp => {
     const firebaseConfig = {
         apiKey: config.apikey,
         authDomain: config.authDomain,
-        // databaseURL: "https://dashboard-lfw-default-rtdb.europe-west1.firebasedatabase.app/",
         projectId: config.projectId,
         storageBucket: config.storageBucket,
         messagingSenderId: config.messagingSenderId,
@@ -20,7 +19,7 @@ export default defineNuxtPlugin(nuxtApp => {
     console.log(firebaseConfig)
     console.log(app)
     console.log(config)
-    const auth = getAuth(app);
+    const auth = getAuth();
     // const firestore = getFirestore(app);
     // const database = getDatabase(app);
 
