@@ -2,7 +2,7 @@
 const { $auth } = useNuxtApp();
 // const { registerUser } = useFirebaseAuth(); // auto-imported
 
-const user = reactive({
+const credentials = reactive({
     email: "",
     password: "",
 });
