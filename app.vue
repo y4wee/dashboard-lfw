@@ -12,6 +12,11 @@ const { $database } = useNuxtApp();
 // async function handleRegistration() {
 //     await registerUser(user.email, user.password);
 // }
+const config = useRuntimeConfig();
+console.log("Runtime config:", config);
+if (process.server) {
+  console.log("API secret:", config.API_KEY);
+}
 
 onMounted(() => {
     const data = ref($database, "/yawee");
