@@ -8,6 +8,7 @@ onMounted(() => {});
 
 <template>
     <div>
+        <Header />
         <FormCandidacy />
     </div>
 </template>

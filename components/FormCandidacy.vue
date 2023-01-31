@@ -100,6 +100,7 @@ onMounted(() => {});
     position: relative;
     height: 100vh;
     width: 100vw;
+    pointer-events: none;
     &Overlay {
         width: 100%;
         height: 100%;
@@ -115,11 +116,14 @@ onMounted(() => {});
         align-items: center;
         width: 100%;
         max-width: 500px;
+        height: 80px;
         box-sizing: border-box;
         padding-left: 10px;
         transform: translateX(50px);
+        pointer-events: all;
         & h1 {
             color: white;
+            margin: 0;
         }
         &Button {
             display: flex;
@@ -146,6 +150,7 @@ onMounted(() => {});
         padding-top: 110px;
         background-color: #22272c;
         color: white;
+        pointer-events: all;
     }
     &Input {
         display: flex;
