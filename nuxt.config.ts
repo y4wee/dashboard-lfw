@@ -17,5 +17,8 @@ export default defineNuxtConfig({
             MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
             APP_ID: process.env.APP_ID,
         }
-    }
+    },
+    css: [
+        '@fortawesome/fontawesome-svg-core/styles.css'
+    ],
 })

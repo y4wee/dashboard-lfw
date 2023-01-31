@@ -87,6 +87,11 @@ onMounted(() => {});
 </template>
 
 <style lang="scss">
+$colorBack: #0e0f0e;
+$colorContainer: #22272c;
+$colorGray: #424f4f;
+$colorGreen: #7ed8b2;
+
 .creds {
     display: flex;
     flex-direction: column;

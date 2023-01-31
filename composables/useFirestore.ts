@@ -1,4 +1,4 @@
-import { doc, collection, addDoc, query, getDocs, updateDoc  } from "firebase/firestore"; 
+import { doc, collection, addDoc, query, getDocs, updateDoc, deleteDoc, onSnapshot } from "firebase/firestore"; 
 
 // ajout d'un nouveau doc à la collection
 export const addToCollection = async (candidacy: object) => {
@@ -10,7 +10,7 @@ export const addToCollection = async (candidacy: object) => {
       } catch (error) {
         console.error("Error adding document: ", error);
       }
-}
+};
 
 // modification d'un doc
 export const updateDocument = async (id: string, candidacy: object) => {
@@ -23,22 +23,35 @@ export const updateDocument = async (id: string, candidacy: object) => {
   } catch (error) {
     console.error("Error updating document: ", error);
   }
-}
+};
 
-// obtention des doc de la collection
-export const getAllDocs = async () => {
+// suppression d'un doc
+export const deleteDocument = async (id: string) => {
+  const { $firestore, $auth } = useNuxtApp();
+  const docRef = doc($firestore, `${$auth.currentUser.uid}`, id);
+
+  try {
+    await deleteDoc(docRef);
+    console.log("Document deleted");
+  } catch (error) {
+    console.error("Error deleting document: ", error);
+  }
+};
+
+// lecture des doc de la collection
+export const readAllDocs = () => {
   const { $firestore, $auth } = useNuxtApp();
   const dataCandidacy = useDataCandidacy();
 
-  try {
-      const querySnapshot = await getDocs(query(collection($firestore, `${$auth.currentUser.uid}`)));
-      querySnapshot.forEach((doc) => {
-        dataCandidacy.value.push({
-          id: doc.id,
-          ...doc.data(),
-        });
+  const q = query(collection($firestore, `${$auth.currentUser.uid}`));
+  const unsub = onSnapshot(q, (querySnapshot) => {
+    let docArray: any = [];
+    querySnapshot.forEach((doc) => {
+      docArray.push({
+        id: doc.id,
+        ...doc.data(),
       });
-    } catch (error) {
-      console.error("Error adding document: ", error);
-    }
-}
+    });
+    dataCandidacy.value = docArray;
+  });
+};

@@ -32,17 +32,14 @@ export const initUser = () => {
     const { $auth } = useNuxtApp()
     const currentUser = useCurrentUser();
     const dataCandidacy = useDataCandidacy();
-    // const router = useRouter();
   
     onAuthStateChanged($auth, (user) => {
       if (user) {
         // User is signed in
-        // router.push("/home");
         currentUser.value = $auth.currentUser;
-        getAllDocs();
+        readAllDocs();
       } else {
         //if signed out
-        // router.push("/");
         currentUser.value = null;
         dataCandidacy.value = [];
       }

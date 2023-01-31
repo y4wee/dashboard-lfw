@@ -34,11 +34,17 @@ onBeforeMount(() => {
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+
+$colorBack: #0e0f0e;
+$colorContainer: #22272c;
+$colorGray: #424f4f;
+$colorGreen: #7ed8b2;
+
 body {
     margin: 0;
     padding: 0;
     font-family: "Roboto", sans-serif;
-    background-color: #0e0f0e;
+    background-color: $colorBack;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

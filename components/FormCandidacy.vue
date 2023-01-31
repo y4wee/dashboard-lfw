@@ -35,6 +35,9 @@ const formTransition = () => {
     });
 };
 const addCandidacy = () => {
+    const date = new Date();
+    formCandidacy.date = date;
+
     if (!formCandidacy.name) {
         alert("entreprise name missing");
         return;
@@ -95,9 +98,16 @@ onMounted(() => {});
 </template>
 
 <style lang="scss">
+$colorBack: #0e0f0e;
+$colorContainer: #22272c;
+$colorGray: #424f4f;
+$colorGreen: #7ed8b2;
+
 .formCandidacy {
     z-index: 100;
-    position: relative;
+    position: fixed;
+    left: 0;
+    top: 0;
     height: 100vh;
     width: 100vw;
     pointer-events: none;
@@ -121,8 +131,8 @@ onMounted(() => {});
         padding-left: 10px;
         transform: translateX(50px);
         pointer-events: all;
+        color: white;
         & h1 {
-            color: white;
             margin: 0;
         }
         &Button {
@@ -132,8 +142,8 @@ onMounted(() => {});
             width: 50px;
             height: 50px;
             font-size: 4rem;
-            color: white;
             cursor: pointer;
+            user-select: none;
         }
     }
     &Container {
@@ -148,7 +158,7 @@ onMounted(() => {});
         max-width: 500px;
         box-sizing: border-box;
         padding-top: 110px;
-        background-color: #22272c;
+        background-color: $colorContainer;
         color: white;
         pointer-events: all;
     }
@@ -179,8 +189,9 @@ onMounted(() => {});
         margin: 15px 0;
         font-size: 2.5rem;
         color: white;
-        background-color: #424f4f;
+        background-color: $colorGray;
         cursor: pointer;
+        user-select: none;
     }
 }
 </style>

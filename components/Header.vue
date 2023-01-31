@@ -1,10 +1,37 @@
-<script setup></script>
+<script setup>
+import { gsap } from "gsap";
+
+const dropdownOn = ref(false);
+
+const dropdownTransition = () => {
+    if (dropdownOn.value) {
+        gsap.to(".headerUser", {
+            clipPath:
+                "polygon(0% 0%, 100% 0%, 100% calc(0% + 80px), 0% calc(0% + 80px))",
+            duration: 0.3,
+            ease: "sine.inOut",
+            onComplete: () => (dropdownOn.value = !dropdownOn.value),
+        });
+    } else {
+        gsap.to(".headerUser", {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% calc(100%), 0% calc(100%))",
+            duration: 0.3,
+            ease: "sine.inOut",
+            onComplete: () => (dropdownOn.value = !dropdownOn.value),
+        });
+    }
+};
+
+const signout = async () => {
+    const result = await signOutUser();
+    console.log(result);
+};
+</script>
 
 <template>
     <header class="header">
-        <!-- <div class="signout" @click="signOutUser">signout</div> -->
         <div class="headerUser">
-            <div class="headerUserContainer">
+            <div class="headerUserContainer" @click="dropdownTransition">
                 <div class="headerUserImg"></div>
                 <div class="headerUserName">John Doe</div>
 
@@ -12,11 +39,20 @@
             </div>
             <div class="headerUserDropdown">
                 <div class="headerUserDropdownLink headerUserDropdownProfil">
-                    <div class="headerUserDropdownIcon"></div>
+                    <div class="headerUserDropdownIcon">
+                        <font-awesome-icon :icon="['fas', 'gear']" />
+                    </div>
                     <div class="headerUserDropdownText">Profil</div>
                 </div>
-                <div class="headerUserDropdownLink headerUserDropdownSignout">
-                    <div class="headerUserDropdownIcon"></div>
+                <div
+                    class="headerUserDropdownLink headerUserDropdownSignout"
+                    @click="signout"
+                >
+                    <div class="headerUserDropdownIcon">
+                        <font-awesome-icon
+                            :icon="['fas', 'right-from-bracket']"
+                        />
+                    </div>
                     <div class="headerUserDropdownText">Sign Out</div>
                 </div>
             </div>
@@ -38,13 +74,20 @@ $colorGreen: #7ed8b2;
     background-color: rgba($color: $colorContainer, $alpha: 0.9);
     color: white;
     font-size: 1.2rem;
+    user-select: none;
     &User {
         display: flex;
         flex-direction: column;
         position: absolute;
         top: 0;
         right: 0;
-        clip-path: inset(0 0 calc(100% - 80px) 0);
+        cursor: pointer;
+        clip-path: polygon(
+            0% 0%,
+            100% 0%,
+            100% calc(0% + 80px),
+            0% calc(0% + 80px)
+        );
         &Container {
             display: flex;
             align-items: center;
@@ -78,11 +121,16 @@ $colorGreen: #7ed8b2;
                 align-items: center;
                 width: 60px;
                 height: 60px;
-                border-radius: 50%;
-                background-color: $colorGray;
+                font-size: 1.4rem;
             }
             &Text {
                 margin: 0 10px;
+            }
+            &Profil:hover {
+                background-color: rgba($color: $colorGray, $alpha: 0.9);
+            }
+            &Signout:hover {
+                background-color: rgba($color: $colorGray, $alpha: 0.9);
             }
         }
     }
