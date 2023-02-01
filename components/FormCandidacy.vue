@@ -42,7 +42,16 @@ const addCandidacy = () => {
         alert("entreprise name missing");
         return;
     }
-    addToCollection(formCandidacy);
+    addToCollection(formCandidacy)
+        .then(() => {
+            formCandidacy.name = null;
+            formCandidacy.adress = null;
+            formCandidacy.date = null;
+            formTransition();
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 };
 onMounted(() => {});
 </script>
