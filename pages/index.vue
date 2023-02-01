@@ -9,6 +9,12 @@ const transformDate = (currentDate) => {
     let dateFormated = dd + "/" + mm + "/" + yyyy;
     return dateFormated;
 };
+
+const deleteCandidacy = (id) => {
+    if(confirm("do you really want to delete ?")) {
+        deleteDocument(id)
+    }
+}
 onMounted(() => {});
 </script>
 
@@ -22,16 +28,14 @@ onMounted(() => {});
                 v-for="candidacy in dataCandidacy"
                 :key="candidacy.id"
             >
-                <div class="candidacyTitle">
-                    <h2>
-                        {{
-                            candidacy.name.charAt(0).toUpperCase() +
-                            candidacy.name.slice(1)
-                        }}
-                    </h2>
-                    <div class="candidacyDate">
-                        {{ transformDate(candidacy.date.seconds) }}
-                    </div>
+                <h2>
+                    {{
+                        candidacy.name.charAt(0).toUpperCase() +
+                        candidacy.name.slice(1)
+                    }}
+                </h2>
+                <div class="candidacyDate">
+                    {{ transformDate(candidacy.date.seconds) }}
                 </div>
                 <p>
                     {{
@@ -39,6 +43,7 @@ onMounted(() => {});
                         candidacy.type.slice(1)
                     }}
                 </p>
+                <div class="candidacyDelete" @click="deleteCandidacy(candidacy.id)">Delete</div>
             </div>
         </div>
     </div>
@@ -53,6 +58,7 @@ $colorGreen: #7ed8b2;
 .candidacyContainer {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     width: 100vw;
     min-height: 100vh;
     padding-top: 100px;
@@ -65,5 +71,15 @@ $colorGreen: #7ed8b2;
     height: fit-content;
     margin: 10px;
     background-color: rgba($color: $colorGray, $alpha: 0.9);
+}
+.candidacyDelete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    background-color: $colorGreen;
+    color: $colorBack;
+    cursor: pointer;
 }
 </style>

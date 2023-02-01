@@ -4,17 +4,17 @@ import { gsap } from "gsap";
 const dropdownOn = ref(false);
 
 const dropdownTransition = () => {
+    gsap.killTweensOf(".headerUserDropdown");
     if (dropdownOn.value) {
-        gsap.to(".headerUser", {
-            clipPath:
-                "polygon(0% 0%, 100% 0%, 100% calc(0% + 80px), 0% calc(0% + 80px))",
+        gsap.to(".headerUserDropdown", {
+            clipPath: "inset(0 0 100% 0)",
             duration: 0.3,
             ease: "sine.inOut",
             onComplete: () => (dropdownOn.value = !dropdownOn.value),
         });
     } else {
-        gsap.to(".headerUser", {
-            clipPath: "polygon(0% 0%, 100% 0%, 100% calc(100%), 0% calc(100%))",
+        gsap.to(".headerUserDropdown", {
+            clipPath: "inset(0 0 0% 0)",
             duration: 0.3,
             ease: "sine.inOut",
             onComplete: () => (dropdownOn.value = !dropdownOn.value),
@@ -82,16 +82,12 @@ $colorGreen: #7ed8b2;
         top: 0;
         right: 0;
         cursor: pointer;
-        clip-path: polygon(
-            0% 0%,
-            100% 0%,
-            100% calc(0% + 80px),
-            0% calc(0% + 80px)
-        );
+        pointer-events: none;
         &Container {
             display: flex;
             align-items: center;
             height: 80px;
+            pointer-events: all;
         }
         &Img {
             width: 60px;
@@ -109,6 +105,8 @@ $colorGreen: #7ed8b2;
             display: flex;
             flex-direction: column;
             background-color: rgba($color: $colorContainer, $alpha: 0.9);
+            clip-path: inset(0 0 100% 0);
+            pointer-events: all;
             &Link {
                 display: flex;
                 align-items: center;

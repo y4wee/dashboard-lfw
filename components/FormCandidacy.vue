@@ -91,7 +91,7 @@ onMounted(() => {});
         <div class="formCandidacyUtils">
             <h1>Nouvelle Candidature</h1>
             <div class="formCandidacyUtilsButton" @click="formTransition">
-                +
+                <font-awesome-icon :icon="['fas', 'plus']" />
             </div>
         </div>
     </div>
@@ -141,7 +141,7 @@ $colorGreen: #7ed8b2;
             align-items: center;
             width: 50px;
             height: 50px;
-            font-size: 4rem;
+            font-size: 2rem;
             cursor: pointer;
             user-select: none;
         }
