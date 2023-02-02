@@ -26,6 +26,11 @@ $colorGreen: #7ed8b2;
 $colorOrange: #ffa45c;
 $colorRed: #ff5959;
 
+.home {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
 .candidacyContainer {
     display: flex;
     flex-wrap: wrap;

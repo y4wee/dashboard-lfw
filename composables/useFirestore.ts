@@ -52,6 +52,9 @@ export const readAllDocs = () => {
         ...doc.data(),
       });
     });
+    docArray.sort((a: any, b: any) => {
+      return a.name.localeCompare(b.name);
+    })
     dataCandidacy.value = docArray;
   });
 };
