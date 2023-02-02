@@ -23,6 +23,14 @@ const cardUtilsTransition = () => {
         duration: 0.3,
         ease: "sine.inOut",
     });
+    gsap.to(
+        `.cardCandidacy${candidacy.id.slice(1, 4)} .cardCandidacyUtilsButton`,
+        {
+            rotateZ: cardUtilsOn.value ? "180deg" : "0",
+            duration: 0.3,
+            ease: "sine.inOut",
+        }
+    );
 };
 
 const updateState = (e) => {
@@ -57,18 +65,22 @@ const deleteCandidacy = (id) => {
             }}
         </p>
         <div class="cardCandidacyState">
-            <font-awesome-icon
-                v-if="candidacy.state === 'entretien'"
-                :icon="['fa', 'chalkboard-user']"
-            />
-            <font-awesome-icon
-                v-if="candidacy.state === 'en attente'"
-                :icon="['fas', 'hourglass-half']"
-            />
-            <font-awesome-icon
-                v-if="candidacy.state === 'refus'"
-                :icon="['fas', 'ban']"
-            />
+            <div class="cardCandidacyStateContainer">
+                <font-awesome-icon
+                    class="cardCandidacyStateYes"
+                    v-if="candidacy.state === 'entretien'"
+                    :icon="['fa', 'chalkboard-user']"
+                />
+                <font-awesome-icon
+                    v-if="candidacy.state === 'en attente'"
+                    :icon="['fas', 'hourglass-half']"
+                />
+                <font-awesome-icon
+                    class="cardCandidacyStateNo"
+                    v-if="candidacy.state === 'refus'"
+                    :icon="['fas', 'ban']"
+                />
+            </div>
         </div>
 
         <div class="cardCandidacyUtils">
@@ -150,6 +162,7 @@ $colorContainer: #373741;
 $colorGray: #22272c;
 $colorGreen: #7ed8b2;
 $colorOrange: #ffa45c;
+$colorRed: #ff5959;
 
 .cardCandidacy {
     position: relative;
@@ -159,12 +172,42 @@ $colorOrange: #ffa45c;
     margin: 10px;
     background-color: rgba($color: $colorGray, $alpha: 0.9);
     color: white;
-    border-radius: 20px;
-    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
     overflow: hidden;
+    user-select: none;
     &Name {
         text-align: center;
         color: $colorOrange;
+        margin: 40px 0 0 0;
+    }
+    &State {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: $colorBack;
+        color: $colorBack;
+        &Container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: $colorGray;
+        }
+        &Yes {
+            color: $colorGreen;
+        }
+        &No {
+            color: $colorRed;
+        }
     }
     &Utils {
         position: absolute;
@@ -202,9 +245,15 @@ $colorOrange: #ffa45c;
             cursor: pointer;
             &Svg {
                 pointer-events: none;
+                transition: all 0.3s ease-in-out;
+                &.stateSelected {
+                    color: $colorOrange;
+                    transition: all 0.3s ease-in-out;
+                }
             }
         }
         &Delete {
+            color: $colorRed;
             transform: rotateZ(6deg) translateX(-150px);
             &Rotate {
                 transform: rotateZ(-6deg);
@@ -229,6 +278,7 @@ $colorOrange: #ffa45c;
             }
         }
         &Modify {
+            color: $colorGreen;
             transform: rotateZ(84deg) translateX(-150px);
             &Rotate {
                 transform: rotateZ(-84deg);

@@ -51,7 +51,7 @@ const signout = async () => {
 </template>
 
 <style lang="scss">
-$colorBack: #E1D8CF;
+$colorBack: #e1d8cf;
 $colorContainer: #373741;
 $colorGray: #22272c;
 $colorGreen: #7ed8b2;
@@ -63,6 +63,7 @@ $colorGreen: #7ed8b2;
     width: 100vw;
     height: 80px;
     background-color: rgba($color: $colorContainer, $alpha: 0.9);
+    backdrop-filter: blur(5px);
     color: white;
     font-size: 1.2rem;
     user-select: none;
