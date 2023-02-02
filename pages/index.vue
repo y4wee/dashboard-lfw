@@ -35,7 +35,6 @@ $colorRed: #ff5959;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100vw;
     padding-top: 100px;
 }
 </style>

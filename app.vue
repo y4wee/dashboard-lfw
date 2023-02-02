@@ -45,9 +45,15 @@ $colorRed: #ff5959;
 body {
     margin: 0;
     padding: 0;
+    width: 100vw;
     font-family: "Roboto", sans-serif;
     background-color: $colorBack;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 </style>
