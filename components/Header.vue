@@ -4,22 +4,12 @@ import { gsap } from "gsap";
 const dropdownOn = ref(false);
 
 const dropdownTransition = () => {
-    gsap.killTweensOf(".headerUserDropdown");
-    if (dropdownOn.value) {
-        gsap.to(".headerUserDropdown", {
-            clipPath: "inset(0 0 100% 0)",
-            duration: 0.3,
-            ease: "sine.inOut",
-            onComplete: () => (dropdownOn.value = !dropdownOn.value),
-        });
-    } else {
-        gsap.to(".headerUserDropdown", {
-            clipPath: "inset(0 0 0% 0)",
-            duration: 0.3,
-            ease: "sine.inOut",
-            onComplete: () => (dropdownOn.value = !dropdownOn.value),
-        });
-    }
+    dropdownOn.value = !dropdownOn.value;
+    gsap.to(".headerUserDropdown", {
+        clipPath: dropdownOn.value ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)",
+        duration: 0.3,
+        ease: "sine.inOut",
+    });
 };
 
 const signout = async () => {
@@ -61,10 +51,11 @@ const signout = async () => {
 </template>
 
 <style lang="scss">
-$colorBack: #0e0f0e;
-$colorContainer: #22272c;
-$colorGray: #424f4f;
+$colorBack: #E1D8CF;
+$colorContainer: #373741;
+$colorGray: #22272c;
 $colorGreen: #7ed8b2;
+
 .header {
     z-index: 50;
     position: fixed;

@@ -38,7 +38,7 @@ export const deleteDocument = async (id: string) => {
   }
 };
 
-// lecture des doc de la collection
+// lecture des doc de la collection en temps réel
 export const readAllDocs = () => {
   const { $firestore, $auth } = useNuxtApp();
   const dataCandidacy = useDataCandidacy();

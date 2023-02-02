@@ -1,58 +1,27 @@
 <script setup>
 const dataCandidacy = useDataCandidacy();
 
-const transformDate = (currentDate) => {
-    let date = new Date(currentDate * 1000);
-    const dd = String(date.getDate()).padStart(2, "0");
-    const mm = String(date.getMonth() + 1).padStart(2, "0");
-    const yyyy = date.getFullYear();
-    let dateFormated = dd + "/" + mm + "/" + yyyy;
-    return dateFormated;
-};
-
-const deleteCandidacy = (id) => {
-    if(confirm("do you really want to delete ?")) {
-        deleteDocument(id)
-    }
-}
 onMounted(() => {});
 </script>
 
 <template>
-    <div>
+    <div class="home">
         <Header />
         <FormCandidacy />
         <div class="candidacyContainer">
-            <div
-                class="candidacyCard"
+            <CardCandidacy
                 v-for="candidacy in dataCandidacy"
                 :key="candidacy.id"
-            >
-                <h2>
-                    {{
-                        candidacy.name.charAt(0).toUpperCase() +
-                        candidacy.name.slice(1)
-                    }}
-                </h2>
-                <div class="candidacyDate">
-                    {{ transformDate(candidacy.date.seconds) }}
-                </div>
-                <p>
-                    {{
-                        candidacy.type.charAt(0).toUpperCase() +
-                        candidacy.type.slice(1)
-                    }}
-                </p>
-                <div class="candidacyDelete" @click="deleteCandidacy(candidacy.id)">Delete</div>
-            </div>
+                :candidacy="candidacy"
+            />
         </div>
     </div>
 </template>
 
 <style lang="scss">
-$colorBack: #0e0f0e;
-$colorContainer: #22272c;
-$colorGray: #424f4f;
+$colorBack: #E1D8CF;
+$colorContainer: #373741;
+$colorGray: #22272c;
 $colorGreen: #7ed8b2;
 
 .candidacyContainer {
@@ -60,26 +29,7 @@ $colorGreen: #7ed8b2;
     flex-wrap: wrap;
     justify-content: center;
     width: 100vw;
-    min-height: 100vh;
     padding-top: 100px;
     box-sizing: border-box;
-    color: white;
-}
-.candidacyCard {
-    width: 100%;
-    max-width: 300px;
-    height: fit-content;
-    margin: 10px;
-    background-color: rgba($color: $colorGray, $alpha: 0.9);
-}
-.candidacyDelete {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    height: 50px;
-    background-color: $colorGreen;
-    color: $colorBack;
-    cursor: pointer;
 }
 </style>

@@ -35,9 +35,9 @@ onBeforeMount(() => {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 
-$colorBack: #0e0f0e;
-$colorContainer: #22272c;
-$colorGray: #424f4f;
+$colorBack: #E1D8CF;
+$colorContainer: #373741;
+$colorGray: #22272c;
 $colorGreen: #7ed8b2;
 
 body {
