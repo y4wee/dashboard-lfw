@@ -55,6 +55,8 @@ $colorBack: #e1d8cf;
 $colorContainer: #373741;
 $colorGray: #22272c;
 $colorGreen: #7ed8b2;
+$colorOrange: #ffa45c;
+$colorRed: #ff5959;
 
 .header {
     z-index: 50;

@@ -181,6 +181,11 @@ $colorRed: #ff5959;
         color: $colorOrange;
         margin: 40px 0 0 0;
     }
+    &Date {
+        text-align: center;
+        font-size: 1rem;
+        color: $colorBack;
+    }
     &State {
         position: absolute;
         top: -10px;

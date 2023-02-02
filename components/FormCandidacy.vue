@@ -66,6 +66,7 @@ onMounted(() => {});
                 type="text"
                 placeholder="entreprise"
                 autocomplete="false"
+                maxlength="20"
             />
             <input
                 class="formCandidacyInput formCandidacyAdress"
@@ -107,10 +108,12 @@ onMounted(() => {});
 </template>
 
 <style lang="scss">
-$colorBack: #0e0f0e;
-$colorContainer: #22272c;
-$colorGray: #424f4f;
+$colorBack: #e1d8cf;
+$colorContainer: #373741;
+$colorGray: #22272c;
 $colorGreen: #7ed8b2;
+$colorOrange: #ffa45c;
+$colorRed: #ff5959;
 
 .formCandidacy {
     z-index: 100;
