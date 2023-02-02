@@ -32,6 +32,5 @@ $colorRed: #ff5959;
     justify-content: center;
     width: 100vw;
     padding-top: 100px;
-    box-sizing: border-box;
 }
 </style>
