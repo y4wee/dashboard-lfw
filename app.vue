@@ -1,26 +1,7 @@
 <script setup>
-// import { ref, onValue } from "firebase/database";
 const currentUser = useCurrentUser();
-// const { $database } = useNuxtApp();
-const { $auth } = useNuxtApp();
-// const { registerUser } = useFirebaseAuth(); // auto-imported
-
-// const credentials = reactive({
-//     email: "",
-//     password: "",
-// });
-
-// async function handleRegistration() {
-//     await registerUser(user.email, user.password);
-// }
 
 onBeforeMount(() => {
-    // const data = ref($database, "/yawee");
-    // onValue(data, (snapshot) => {
-    //     if (snapshot.val()) {
-    //         console.log(snapshot.val());
-    //     }
-    // });
     initUser();
 });
 </script>
@@ -45,7 +26,7 @@ $colorRed: #ff5959;
 body {
     margin: 0;
     padding: 0;
-    width: 100vw;
+    min-width: 300px;
     font-family: "Roboto", sans-serif;
     background-color: $colorBack;
     -webkit-font-smoothing: antialiased;

@@ -169,7 +169,7 @@ $colorRed: #ff5959;
     width: 100%;
     max-width: 300px;
     height: 200px;
-    margin: 10px;
+    margin: 5px;
     background-color: rgba($color: $colorGray, $alpha: 0.9);
     color: white;
     border-bottom-left-radius: 20px;
@@ -197,7 +197,6 @@ $colorRed: #ff5959;
         height: 50px;
         border-radius: 50%;
         background-color: $colorBack;
-        color: $colorBack;
         &Container {
             display: flex;
             justify-content: center;

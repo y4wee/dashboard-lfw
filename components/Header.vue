@@ -70,6 +70,7 @@ $colorRed: #ff5959;
     color: white;
     font-size: 1.2rem;
     user-select: none;
+    border-bottom: 2px solid white;
     &User {
         display: flex;
         flex-direction: column;
