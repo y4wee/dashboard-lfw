@@ -18,7 +18,6 @@ const sortCandidacyByDate = (data) => {
     candidacyDaily.value = data.filter(
         (candidacy) => transformDate(candidacy.date.seconds) === today
     );
-    console.log(candidacyDaily.value);
 };
 onMounted(() => {
     sortCandidacyByDate(dataCandidacy.value);
@@ -28,7 +27,9 @@ onMounted(() => {
 <template>
     <div class="candidacyDay">
         <h1 class="candidacyDayTitle">
-            {{ candidacyDaily.length }} Candidatures pour aujourd'hui
+            {{ candidacyDaily.length }}
+            {{ candidacyDaily.length > 1 ? "Candidatures" : "Candidature" }}
+            pour aujourd'hui
         </h1>
         <div class="candidacyDayContainer">
             <CardCandidacy

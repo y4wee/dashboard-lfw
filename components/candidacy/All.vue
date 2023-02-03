@@ -6,7 +6,9 @@ const searchCandidacy = useSearchCandidacy();
 <template>
     <div class="candidacyAll">
         <h1 class="candidacyAllTitle">
-            {{ dataCandidacy.length }} Candidatures au total
+            {{ dataCandidacy.length }}
+            {{ dataCandidacy.length > 1 ? "Candidatures" : "Candidature" }}
+            au total
         </h1>
         <div class="candidacyAllContainer">
             <CardCandidacy
