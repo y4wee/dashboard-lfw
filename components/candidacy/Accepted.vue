@@ -19,8 +19,11 @@ onMounted(() => {
     <div class="candidacyAccepted">
         <h1 class="candidacyAcceptedTitle">
             {{ candidacyAccepted.length }}
-            {{ candidacyAccepted.length > 1 ? "Entretiens" : "Entretien" }}
-            de prévu
+            {{
+                candidacyAccepted.length > 1
+                    ? "Entretiens prévus"
+                    : "Entretien prévu"
+            }}
         </h1>
         <div class="candidacyAcceptedContainer">
             <CardCandidacy
