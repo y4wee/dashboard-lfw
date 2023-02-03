@@ -5,7 +5,9 @@ const searchCandidacy = useSearchCandidacy();
 
 <template>
     <div class="candidacyAll">
-        <h1 class="candidacyAllTitle">{{ dataCandidacy.length }} Candidatures au total</h1>
+        <h1 class="candidacyAllTitle">
+            {{ dataCandidacy.length }} Candidatures au total
+        </h1>
         <div class="candidacyAllContainer">
             <CardCandidacy
                 v-for="candidacy in dataCandidacy"
@@ -38,6 +40,7 @@ $colorRed: #ff5959;
     width: 100%;
     &Title {
         color: $colorGray;
+        text-align: center;
         text-decoration: underline $colorGreen;
     }
     &Container {
