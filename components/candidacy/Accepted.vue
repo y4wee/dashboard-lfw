@@ -8,7 +8,6 @@ const sortCandidacyAccepted = (data) => {
     candidacyAccepted.value = data.filter(
         (candidacy) => candidacy.state === "entretien"
     );
-    console.log(candidacyAccepted.value);
 };
 onMounted(() => {
     sortCandidacyAccepted(dataCandidacy.value);

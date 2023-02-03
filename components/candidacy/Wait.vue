@@ -8,7 +8,6 @@ const sortCandidacyWait = (data) => {
     candidacyWait.value = data.filter(
         (candidacy) => candidacy.state === "en attente"
     );
-    console.log(candidacyWait.value);
 };
 onMounted(() => {
     sortCandidacyWait(dataCandidacy.value);
