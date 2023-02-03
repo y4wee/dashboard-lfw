@@ -1,19 +1,19 @@
 <script setup>
 import { gsap } from "gsap";
 
-const barSelectedIndex = ref(0);
+const utilsBarIndex = useUtilsBarIndex();
 
 const barSelectedTransition = (e) => {
     let target = e.target.dataset.barIndex;
-    if (target !== barSelectedIndex.value) {
-        barSelectedIndex.value = target;
+    if (target !== utilsBarIndex.value) {
+        utilsBarIndex.value = target;
         gsap.to(".utilsBarSelectedGreen", {
-            yPercent: barSelectedIndex.value * 100,
+            yPercent: utilsBarIndex.value * 100,
             duration: 0.3,
             ease: "sine.inOut",
         });
         gsap.to(".utilsBarSelectedRed", {
-            yPercent: barSelectedIndex.value * 100,
+            yPercent: utilsBarIndex.value * 100,
             duration: 0.5,
             ease: "sine.inOut",
         });
@@ -94,7 +94,6 @@ $colorRed: #ff5959;
         align-items: center;
         width: 50px;
         height: 60px;
-        transform: translateY(000%);
         pointer-events: none;
         &Green::before {
             content: "";

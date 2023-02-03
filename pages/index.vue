@@ -1,12 +1,13 @@
 <script setup>
 const dataCandidacy = useDataCandidacy();
+const utilsBarIndex = useUtilsBarIndex();
+const searchCandidacy = useSearchCandidacy();
 
-const sortedCandidacy = ref("");
+// onUpdated(() => {
+//     console.log(utilsBarIndex.value);
+// });
 
-onMounted(() => {
-    console.log(sortedCandidacy.value);
-    console.log();
-});
+onMounted(() => {});
 </script>
 
 <template>
@@ -22,23 +23,16 @@ onMounted(() => {
                 type="text"
                 placeholder="Rechercher"
                 maxlength="20"
-                v-model="sortedCandidacy"
+                v-model="searchCandidacy"
             />
         </div>
         <UtilsBar />
         <div class="candidacyContainer">
-            <CardCandidacy
-                v-for="candidacy in dataCandidacy"
-                :key="candidacy.id"
-                :candidacy="candidacy"
-                v-show="
-                    sortedCandidacy
-                        ? candidacy.name
-                              .toLowerCase()
-                              .startsWith(sortedCandidacy.toLowerCase())
-                        : true
-                "
-            />
+            <CandidacyAll v-if="utilsBarIndex === '0'" />
+            <CandidacyDay v-if="utilsBarIndex === '1'" />
+            <CandidacyAccepted v-if="utilsBarIndex === '2'" />
+            <CandidacyWait v-if="utilsBarIndex === '3'" />
+            <CandidacyRefus v-if="utilsBarIndex === '4'" />
         </div>
     </div>
 </template>
@@ -59,9 +53,9 @@ $colorRed: #ff5959;
 }
 .candidacyContainer {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    padding-left: 50px;
+    justify-content: center;
+    width: calc(100% - 50px);
+    margin-left: 50px;
 }
 .searchBar {
     z-index: 10;

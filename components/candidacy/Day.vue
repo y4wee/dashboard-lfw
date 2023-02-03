@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-    <div></div>
+    <div>day</div>
 </template>
 
 <style lang="scss"></style>
