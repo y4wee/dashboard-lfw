@@ -2,15 +2,10 @@
 const dataCandidacy = useDataCandidacy();
 const searchCandidacy = useSearchCandidacy();
 
-const candidacyRefus = ref([]);
-
-const sortCandidacyRefus = (data) => {
-    candidacyRefus.value = data.filter(
+const candidacyRefus = computed(() => {
+    return dataCandidacy.value.filter(
         (candidacy) => candidacy.state === "refus"
     );
-};
-onMounted(() => {
-    sortCandidacyRefus(dataCandidacy.value);
 });
 </script>
 

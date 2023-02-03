@@ -2,15 +2,10 @@
 const dataCandidacy = useDataCandidacy();
 const searchCandidacy = useSearchCandidacy();
 
-const candidacyWait = ref([]);
-
-const sortCandidacyWait = (data) => {
-    candidacyWait.value = data.filter(
+const candidacyWait = computed(() => {
+    return dataCandidacy.value.filter(
         (candidacy) => candidacy.state === "en attente"
     );
-};
-onMounted(() => {
-    sortCandidacyWait(dataCandidacy.value);
 });
 </script>
 

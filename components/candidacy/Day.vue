@@ -2,8 +2,6 @@
 const dataCandidacy = useDataCandidacy();
 const searchCandidacy = useSearchCandidacy();
 
-const candidacyDaily = ref([]);
-
 const transformDate = (currentDate) => {
     let date = new Date(currentDate * 1000);
     const dd = String(date.getDate()).padStart(2, "0");
@@ -13,14 +11,11 @@ const transformDate = (currentDate) => {
     return dateFormated;
 };
 
-const sortCandidacyByDate = (data) => {
-    const today = transformDate(new Date() / 1000);
-    candidacyDaily.value = data.filter(
+const today = transformDate(new Date() / 1000);
+const candidacyDaily = computed(() => {
+    return dataCandidacy.value.filter(
         (candidacy) => transformDate(candidacy.date.seconds) === today
     );
-};
-onMounted(() => {
-    sortCandidacyByDate(dataCandidacy.value);
 });
 </script>
 
