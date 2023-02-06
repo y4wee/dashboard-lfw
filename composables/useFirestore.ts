@@ -6,7 +6,6 @@ export const addToCollection = async (candidacy: object) => {
 
     try {
         const docRef = await addDoc(collection($firestore, `${$auth.currentUser.uid}`), candidacy);
-        console.log("Document written with ID: ", docRef.id);
       } catch (error) {
         console.error("Error adding document: ", error);
       }
@@ -19,7 +18,6 @@ export const updateDocument = async (id: string, candidacy: object) => {
 
   try {
     await updateDoc(docRef, candidacy);
-    console.log("Document updated");
   } catch (error) {
     console.error("Error updating document: ", error);
   }
@@ -32,7 +30,6 @@ export const deleteDocument = async (id: string) => {
 
   try {
     await deleteDoc(docRef);
-    console.log("Document deleted");
   } catch (error) {
     console.error("Error deleting document: ", error);
   }
