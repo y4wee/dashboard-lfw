@@ -30,7 +30,9 @@ const signout = async () => {
             <div class="headerUserDropdown">
                 <div class="headerUserDropdownLink headerUserDropdownProfil">
                     <div class="headerUserDropdownIcon">
-                        <font-awesome-icon :icon="['fas', 'gear']" />
+                        <client-only>
+                            <font-awesome-icon :icon="['fas', 'gear']" />
+                        </client-only>
                     </div>
                     <div class="headerUserDropdownText">Profil</div>
                 </div>
@@ -39,9 +41,11 @@ const signout = async () => {
                     @click="signout"
                 >
                     <div class="headerUserDropdownIcon">
-                        <font-awesome-icon
-                            :icon="['fas', 'right-from-bracket']"
-                        />
+                        <client-only>
+                            <font-awesome-icon
+                                :icon="['fas', 'right-from-bracket']"
+                            />
+                        </client-only>
                     </div>
                     <div class="headerUserDropdownText">Sign Out</div>
                 </div>

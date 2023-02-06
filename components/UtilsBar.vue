@@ -37,7 +37,9 @@ const barSelectedTransition = (e) => {
             @click="barSelectedTransition"
             data-bar-index="1"
         >
-            <font-awesome-icon :icon="['fa', 'calendar']" />
+            <client-only>
+                <font-awesome-icon :icon="['fa', 'calendar']" />
+            </client-only>
             <div class="utilsBarDayDate">
                 {{ String(new Date().getDate()).padStart(2, "0") }}
             </div>
@@ -47,21 +49,27 @@ const barSelectedTransition = (e) => {
             @click="barSelectedTransition"
             data-bar-index="2"
         >
-            <font-awesome-icon :icon="['fa', 'chalkboard-user']" />
+            <client-only>
+                <font-awesome-icon :icon="['fa', 'chalkboard-user']" />
+            </client-only>
         </div>
         <div
             class="utilsBarIcon utilsBarWait"
             @click="barSelectedTransition"
             data-bar-index="3"
         >
-            <font-awesome-icon :icon="['fa', 'hourglass-half']" />
+            <client-only>
+                <font-awesome-icon :icon="['fa', 'hourglass-half']" />
+            </client-only>
         </div>
         <div
             class="utilsBarIcon utilsBarRefus"
             @click="barSelectedTransition"
             data-bar-index="4"
         >
-            <font-awesome-icon :icon="['fa', 'ban']" />
+            <client-only>
+                <font-awesome-icon :icon="['fa', 'ban']" />
+            </client-only>
         </div>
     </div>
 </template>

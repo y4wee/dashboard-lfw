@@ -1,6 +1,4 @@
 <script setup>
-import { gsap } from "gsap";
-
 const signinForm = reactive({
     email: null,
     password: null,
@@ -19,19 +17,19 @@ const logSwitch = (e) => {
 };
 
 const register = async () => {
-    const credentials = await createUser(
-        registerForm.email,
-        registerForm.password
-    );
+    try {
+        await createUser(registerForm.email, registerForm.password);
+    } catch (error) {
+        if (error) {
+            console.error(error);
+        }
+    }
     registerForm.email = null;
     registerForm.password = null;
 };
 const signin = async () => {
     try {
-        const credentials = await signInUser(
-            signinForm.email,
-            signinForm.password
-        );
+        await signInUser(signinForm.email, signinForm.password);
     } catch (error) {
         if (error) {
             console.error(error);
@@ -68,7 +66,9 @@ const signin = async () => {
                     @click="signin"
                 >
                     <div class="logFormButton">
-                        <font-awesome-icon :icon="['fa', 'toilet-paper']" />
+                        <client-only>
+                            <font-awesome-icon :icon="['fa', 'toilet-paper']" />
+                        </client-only>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,9 @@ const signin = async () => {
                     @click="register"
                 >
                     <div class="logFormButton">
-                        <font-awesome-icon :icon="['fa', 'toilet-paper']" />
+                        <client-only>
+                            <font-awesome-icon :icon="['fa', 'toilet-paper']" />
+                        </client-only>
                     </div>
                 </div>
             </div>

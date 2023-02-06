@@ -16,7 +16,9 @@ onMounted(() => {});
         <FormCandidacy />
         <div class="searchBar">
             <div class="searchBarIcon">
-                <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+                <client-only>
+                    <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+                </client-only>
             </div>
             <input
                 class="searchBarInput"

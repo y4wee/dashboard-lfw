@@ -66,20 +66,26 @@ const deleteCandidacy = (id) => {
         </p>
         <div class="cardCandidacyState">
             <div class="cardCandidacyStateContainer">
-                <font-awesome-icon
-                    class="cardCandidacyStateYes"
-                    v-if="candidacy.state === 'entretien'"
-                    :icon="['fa', 'chalkboard-user']"
-                />
-                <font-awesome-icon
-                    v-if="candidacy.state === 'en attente'"
-                    :icon="['fas', 'hourglass-half']"
-                />
-                <font-awesome-icon
-                    class="cardCandidacyStateNo"
-                    v-if="candidacy.state === 'refus'"
-                    :icon="['fas', 'ban']"
-                />
+                <client-only>
+                    <font-awesome-icon
+                        class="cardCandidacyStateYes"
+                        v-if="candidacy.state === 'entretien'"
+                        :icon="['fa', 'chalkboard-user']"
+                    />
+                </client-only>
+                <client-only>
+                    <font-awesome-icon
+                        v-if="candidacy.state === 'en attente'"
+                        :icon="['fas', 'hourglass-half']"
+                    />
+                </client-only>
+                <client-only>
+                    <font-awesome-icon
+                        class="cardCandidacyStateNo"
+                        v-if="candidacy.state === 'refus'"
+                        :icon="['fas', 'ban']"
+                    />
+                </client-only>
             </div>
         </div>
 
@@ -89,16 +95,20 @@ const deleteCandidacy = (id) => {
                     class="cardCandidacyUtilsIcon cardCandidacyUtilsButton"
                     @click="cardUtilsTransition"
                 >
-                    <font-awesome-icon :icon="['fas', 'gear']" />
+                    <client-only>
+                        <font-awesome-icon :icon="['fas', 'gear']" />
+                    </client-only>
                 </div>
                 <div
                     class="cardCandidacyUtilsIcon cardCandidacyUtilsDelete"
                     @click="deleteCandidacy(candidacy.id)"
                 >
-                    <font-awesome-icon
-                        class="cardCandidacyUtilsIconSvg cardCandidacyUtilsDeleteRotate"
-                        :icon="['fas', 'trash']"
-                    />
+                    <client-only>
+                        <font-awesome-icon
+                            class="cardCandidacyUtilsIconSvg cardCandidacyUtilsDeleteRotate"
+                            :icon="['fas', 'trash']"
+                        />
+                    </client-only>
                 </div>
                 <!-- icon refus -->
                 <div
@@ -106,14 +116,16 @@ const deleteCandidacy = (id) => {
                     data-state="refus"
                     @click="updateState"
                 >
-                    <font-awesome-icon
-                        :class="
-                            candidacy.state === 'refus'
-                                ? 'cardCandidacyUtilsIconSvg cardCandidacyUtilsNoRotate stateSelected'
-                                : 'cardCandidacyUtilsIconSvg cardCandidacyUtilsNoRotate'
-                        "
-                        :icon="['fas', 'ban']"
-                    />
+                    <client-only>
+                        <font-awesome-icon
+                            :class="
+                                candidacy.state === 'refus'
+                                    ? 'cardCandidacyUtilsIconSvg cardCandidacyUtilsNoRotate stateSelected'
+                                    : 'cardCandidacyUtilsIconSvg cardCandidacyUtilsNoRotate'
+                            "
+                            :icon="['fas', 'ban']"
+                        />
+                    </client-only>
                 </div>
                 <!-- icon en attente -->
                 <div
@@ -121,14 +133,16 @@ const deleteCandidacy = (id) => {
                     data-state="en attente"
                     @click="updateState"
                 >
-                    <font-awesome-icon
-                        :class="
-                            candidacy.state === 'en attente'
-                                ? 'cardCandidacyUtilsIconSvg cardCandidacyUtilsWaitRotate stateSelected'
-                                : 'cardCandidacyUtilsIconSvg cardCandidacyUtilsWaitRotate'
-                        "
-                        :icon="['fas', 'hourglass-half']"
-                    />
+                    <client-only>
+                        <font-awesome-icon
+                            :class="
+                                candidacy.state === 'en attente'
+                                    ? 'cardCandidacyUtilsIconSvg cardCandidacyUtilsWaitRotate stateSelected'
+                                    : 'cardCandidacyUtilsIconSvg cardCandidacyUtilsWaitRotate'
+                            "
+                            :icon="['fas', 'hourglass-half']"
+                        />
+                    </client-only>
                 </div>
                 <!-- icon entretien -->
                 <div
@@ -136,20 +150,24 @@ const deleteCandidacy = (id) => {
                     data-state="entretien"
                     @click="updateState"
                 >
-                    <font-awesome-icon
-                        :class="
-                            candidacy.state === 'entretien'
-                                ? 'cardCandidacyUtilsIconSvg cardCandidacyUtilsYesRotate stateSelected'
-                                : 'cardCandidacyUtilsIconSvg cardCandidacyUtilsYesRotate'
-                        "
-                        :icon="['fa', 'chalkboard-user']"
-                    />
+                    <client-only>
+                        <font-awesome-icon
+                            :class="
+                                candidacy.state === 'entretien'
+                                    ? 'cardCandidacyUtilsIconSvg cardCandidacyUtilsYesRotate stateSelected'
+                                    : 'cardCandidacyUtilsIconSvg cardCandidacyUtilsYesRotate'
+                            "
+                            :icon="['fa', 'chalkboard-user']"
+                        />
+                    </client-only>
                 </div>
                 <div class="cardCandidacyUtilsIcon cardCandidacyUtilsModify">
-                    <font-awesome-icon
-                        class="cardCandidacyUtilsIconSvg cardCandidacyUtilsModifyRotate"
-                        :icon="['fas', 'pen']"
-                    />
+                    <client-only>
+                        <font-awesome-icon
+                            class="cardCandidacyUtilsIconSvg cardCandidacyUtilsModifyRotate"
+                            :icon="['fas', 'pen']"
+                        />
+                    </client-only>
                 </div>
             </div>
         </div>

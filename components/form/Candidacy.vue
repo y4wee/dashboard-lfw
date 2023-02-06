@@ -93,14 +93,18 @@ onMounted(() => {});
                 </div>
                 <div class="formCandidacyButton">
                     <div class="formCandidacyButtonIcon" @click="addCandidacy">
-                        <font-awesome-icon :icon="['fas', 'plus']" />
+                        <client-only>
+                            <font-awesome-icon :icon="['fas', 'plus']" />
+                        </client-only>
                     </div>
                 </div>
             </div>
         </div>
         <div class="formCandidacyUtils">
             <div class="formCandidacyUtilsButton" @click="formTransition">
-                <font-awesome-icon :icon="['fas', 'plus']" />
+                <client-only>
+                    <font-awesome-icon :icon="['fas', 'plus']" />
+                </client-only>
             </div>
         </div>
     </div>
