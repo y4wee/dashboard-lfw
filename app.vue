@@ -1,6 +1,4 @@
 <script setup>
-const currentUser = useCurrentUser();
-
 onBeforeMount(() => {
     initUser();
 });
@@ -8,8 +6,7 @@ onBeforeMount(() => {
 
 <template>
     <div>
-        <NuxtPage v-if="currentUser" />
-        <FormCreds v-else />
+        <NuxtPage />
     </div>
 </template>
 
