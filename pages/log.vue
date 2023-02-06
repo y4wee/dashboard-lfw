@@ -129,7 +129,8 @@ $colorRed: #ff5959;
         }
         & .logFormConnexion {
             opacity: 1;
-            transition: opacity 0.2s 0.1s ease-in-out;
+            pointer-events: all;
+            transition: all 0.2s 0.1s ease-in-out;
         }
     }
     &[data-log-selected="inscription"] {
@@ -140,7 +141,8 @@ $colorRed: #ff5959;
         }
         & .logFormInscription {
             opacity: 1;
-            transition: opacity 0.2s 0.1s ease-in-out;
+            pointer-events: all;
+            transition: all 0.2s 0.1s ease-in-out;
         }
     }
     &Container {
@@ -168,6 +170,7 @@ $colorRed: #ff5959;
         background-color: $colorGray;
         opacity: 0;
         transition: all 0.2s ease-in-out;
+        pointer-events: none;
         &Title {
             color: $colorBack;
         }
