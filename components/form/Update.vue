@@ -15,6 +15,11 @@ const formOn = ref(false);
 
 const formUpdateTransition = () => {
     formOn.value = !formOn.value;
+    gsap.to("body", {
+        overflow: formOn.value ? "hidden" : "scroll",
+        duration: 0.3,
+        ease: "sine.inOut",
+    });
     gsap.to(".formUpdateContainer", {
         xPercent: formOn.value ? 100 : 0,
         duration: 0.3,
@@ -177,6 +182,7 @@ $colorRed: #ff5959;
         align-items: center;
         width: 100%;
         height: 50px;
+        margin: 10px 0;
         font-size: 2rem;
         color: $colorRed;
         &Icon {
@@ -197,6 +203,7 @@ $colorRed: #ff5959;
         box-sizing: border-box;
         background-color: $colorGreen;
         color: white;
+        overflow-x: scroll;
         pointer-events: all;
     }
     &Card {
@@ -205,6 +212,7 @@ $colorRed: #ff5959;
         align-items: center;
         width: calc(100% - 20px);
         height: fit-content;
+        margin-bottom: 200px;
         border-radius: 20px;
         background-color: $colorGray;
     }
