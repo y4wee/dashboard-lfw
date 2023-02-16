@@ -2,6 +2,7 @@
 import { gsap } from "gsap";
 
 const { candidacy } = defineProps(["candidacy"]);
+const updateCandidacyData = useUpdateCandidacyData();
 
 const cardUtilsOn = ref(false);
 
@@ -46,6 +47,10 @@ const deleteCandidacy = (id) => {
     if (confirm("do you really want to delete ?")) {
         deleteDocument(id);
     }
+};
+
+const updateTargetCandidacy = (candidacy) => {
+    updateCandidacyData.value = candidacy;
 };
 </script>
 
@@ -99,6 +104,7 @@ const deleteCandidacy = (id) => {
                         <font-awesome-icon :icon="['fas', 'gear']" />
                     </client-only>
                 </div>
+                <!-- icon delete -->
                 <div
                     class="cardCandidacyUtilsIcon cardCandidacyUtilsDelete"
                     @click="deleteCandidacy(candidacy.id)"
@@ -161,7 +167,11 @@ const deleteCandidacy = (id) => {
                         />
                     </client-only>
                 </div>
-                <div class="cardCandidacyUtilsIcon cardCandidacyUtilsModify">
+                <!-- icon modify -->
+                <div
+                    class="cardCandidacyUtilsIcon cardCandidacyUtilsModify"
+                    @click="updateTargetCandidacy(candidacy)"
+                >
                     <client-only>
                         <font-awesome-icon
                             class="cardCandidacyUtilsIconSvg cardCandidacyUtilsModifyRotate"

@@ -17,6 +17,7 @@ const formTransition = () => {
     });
     gsap.to(".formCandidacyOverlay", {
         opacity: formOn.value ? 0 : 0.8,
+        pointerEvents: formOn.value ? "none" : "all",
         duration: 0.3,
         ease: "sine.inOut",
     });

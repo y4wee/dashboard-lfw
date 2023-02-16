@@ -1,19 +1,13 @@
 <script setup>
-const dataCandidacy = useDataCandidacy();
 const utilsBarIndex = useUtilsBarIndex();
 const searchCandidacy = useSearchCandidacy();
-
-// onUpdated(() => {
-//     console.log(utilsBarIndex.value);
-// });
-
-onMounted(() => {});
 </script>
 
 <template>
     <div class="home">
         <Header />
         <FormCandidacy />
+        <FormUpdate />
         <div class="searchBar">
             <div class="searchBarIcon">
                 <client-only>
@@ -92,19 +86,4 @@ $colorRed: #ff5959;
         }
     }
 }
-
-// @media all and (min-width: 940px) {
-//     .home {
-//         padding-top: 100px;
-//     }
-//     .candidacyContainer {
-//         padding-left: 300px;
-//     }
-//     .searchBar {
-//         width: 300px;
-//     }
-//     .utilsBar {
-//         width: 300px;
-//     }
-// }
 </style>
