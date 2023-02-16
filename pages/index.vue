@@ -1,6 +1,12 @@
 <script setup>
 const utilsBarIndex = useUtilsBarIndex();
 const searchCandidacy = useSearchCandidacy();
+
+const searchBarClearTransition = computed(() => {
+    return searchCandidacy.value.length > 0
+        ? "inset(0 0 0 0)"
+        : "inset(0 0 0 100%)";
+});
 </script>
 
 <template>
@@ -12,6 +18,11 @@ const searchCandidacy = useSearchCandidacy();
             <div class="searchBarIcon">
                 <client-only>
                     <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+                </client-only>
+            </div>
+            <div class="searchBarClear" @click="searchCandidacy = ''">
+                <client-only>
+                    <font-awesome-icon :icon="['fas', 'xmark']" />
                 </client-only>
             </div>
             <input
@@ -72,6 +83,20 @@ $colorRed: #ff5959;
         background-color: rgba($color: $colorContainer, $alpha: 0.9);
         backdrop-filter: blur(5px);
         color: white;
+    }
+    &Clear {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+        background-color: $colorRed;
+        color: $colorContainer;
+        clip-path: v-bind(searchBarClearTransition);
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
     }
     &Input {
         width: calc(100% - 50px);
