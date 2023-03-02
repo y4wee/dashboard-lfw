@@ -38,6 +38,10 @@ const dropdownTransition = () => {
             duration: 0.2 + 0.2 * index,
         });
     });
+    gsap.to(".headerUserChevron", {
+        rotateZ: dropdownOn.value ? 180 : 0,
+        duration: 0.2,
+    });
 };
 
 const signout = async () => {
@@ -53,7 +57,7 @@ const signout = async () => {
                     {{ currentUser.name ? currentUser.name : "" }}
                 </div>
 
-                <div class="headerUserButton">
+                <div class="headerUserChevron">
                     <client-only>
                         <font-awesome-icon :icon="['fas', 'chevron-down']" />
                     </client-only>
@@ -155,8 +159,12 @@ $colorRed: #ff5959;
         }
         &Name {
             text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            width: auto;
         }
-        &Button {
+        &Chevron {
             margin: 0 10px;
         }
         &Link {

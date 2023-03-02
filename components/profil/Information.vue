@@ -2,12 +2,13 @@
 const currentUser = useCurrentUser();
 
 const userName = ref("");
-const userImage = ref("");
 
 const changeUserName = () => {
     if (userName.value && infoChanged.value) {
         updateUser({
             displayName: userName.value,
+        }).then(() => {
+            userName.value = "";
         });
     }
 };
@@ -34,6 +35,7 @@ const infoChanged = computed(() => {
                 autocomplete="false"
                 placeholder="Pseudo"
                 class="informationFormInput"
+                maxlength="10"
             />
             <div
                 :class="

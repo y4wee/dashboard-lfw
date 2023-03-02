@@ -60,9 +60,15 @@ export const initUser = () => {
 // update User
 export const updateUser = async (userParams: object): Promise<any> => {
     const { $auth } = useNuxtApp();
+    const currentUser = useCurrentUser();
+
     try {
-        const userUpdating = await updateProfile($auth.currentUser, userParams);
-        console.log(userUpdating);
+        await updateProfile($auth.currentUser, userParams);
+        currentUser.value = {
+            name: $auth.currentUser.displayName,
+            email: $auth.currentUser.email,
+            photoUrl: $auth.currentUser.photoURL,
+        };
     } catch (error: unknown) {
         if (error instanceof Error) {
             return error;
