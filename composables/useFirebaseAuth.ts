@@ -1,10 +1,11 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from 'firebase/auth';
 
 export const createUser = async (email: string, password: string): Promise<any> => {
     const { $auth } = useNuxtApp();
     try {
     const userCreds = await createUserWithEmailAndPassword($auth, email, password)
         if (userCreds) {
+            addAvatar();
             return userCreds;
         }
     } catch (error: unknown) {
@@ -19,6 +20,7 @@ export const signInUser = async (email: string, password: string): Promise<any> 
     try {
     const userCreds = await signInWithEmailAndPassword($auth, email, password)
         if (userCreds) {
+            addAvatar();
             return userCreds;
         }
     } catch (error: unknown) {
@@ -33,26 +35,46 @@ export const initUser = () => {
     const currentUser = useCurrentUser();
     const dataCandidacy = useDataCandidacy();
     const router = useRouter();
-  
+    const route = useRoute();
+    
     onAuthStateChanged($auth, (user) => {
       if (user) {
         // User is signed in
-        router.push({ path: "/" })
-        currentUser.value = $auth.currentUser;
+        router.push({ path: route.path === "/log" ? "/" : `${route.path}` })
+        currentUser.value = {
+            name: $auth.currentUser.displayName,
+            email: $auth.currentUser.email,
+            photoUrl: $auth.currentUser.photoURL,
+        };
         readAllDocs();
+        readAllUserInfo();
       } else {
         //if signed out
         router.push({ path: "/log" })
 
-        currentUser.value = null;
+        currentUser.value = {};
         dataCandidacy.value = [];
       }
     });
 };
   
-  export const signOutUser = async () => {
+// update User
+export const updateUser = async (userParams: object): Promise<any> => {
+    const { $auth } = useNuxtApp();
+    try {
+        const userUpdating = await updateProfile($auth.currentUser, userParams);
+        console.log(userUpdating);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return error;
+        }
+    }
+};
+
+// logout user
+export const signOutUser = async () => {
     const { $auth } = useNuxtApp();
     const result = await $auth.signOut();
     return result;
-  };
+};
 

@@ -1,7 +1,31 @@
 <script setup>
 import { gsap } from "gsap";
 
+import cat1 from "~/assets/lotties/cats/cat1.json"; // couché balle
+import cat2 from "~/assets/lotties/cats/cat2.json"; // turn orange
+import cat3 from "~/assets/lotties/cats/cat3.json"; // sleep stars
+import cat5 from "~/assets/lotties/cats/cat5.json"; // turn white
+import cat6 from "~/assets/lotties/cats/cat6.json"; // sleep bull
+import cat7 from "~/assets/lotties/cats/cat7.json"; // levitation
+import cat9 from "~/assets/lotties/cats/cat9.json"; // yin yang
+import cat10 from "~/assets/lotties/cats/cat10.json"; // alone standing up
+
+const currentUser = useCurrentUser();
+const dataUser = useDataUser();
+const route = useRoute();
+
 const dropdownOn = ref(false);
+
+const cats = [
+    { index: 0, url: cat1 },
+    { index: 1, url: cat2 },
+    { index: 2, url: cat3 },
+    { index: 3, url: cat5 },
+    { index: 4, url: cat6 },
+    { index: 5, url: cat7 },
+    { index: 6, url: cat9 },
+    { index: 7, url: cat10 },
+];
 
 const dropdownTransition = () => {
     dropdownOn.value = !dropdownOn.value;
@@ -14,7 +38,6 @@ const dropdownTransition = () => {
 
 const signout = async () => {
     const result = await signOutUser();
-    console.log(result);
 };
 </script>
 
@@ -22,20 +45,66 @@ const signout = async () => {
     <header class="header">
         <div class="headerUser">
             <div class="headerUserContainer" @click="dropdownTransition">
-                <div class="headerUserImg"></div>
-                <div class="headerUserName">John Doe</div>
+                <div class="headerUserName">
+                    {{ currentUser.name ? currentUser.name : "" }}
+                </div>
 
-                <div class="headerUserButton">--</div>
+                <div class="headerUserButton">
+                    <client-only>
+                        <font-awesome-icon :icon="['fas', 'chevron-down']" />
+                    </client-only>
+                </div>
+                <div
+                    class="headerUserImg"
+                    v-if="dataUser[0]"
+                    :style="{ backgroundColor: dataUser[0].color }"
+                >
+                    <client-only>
+                        <Vue3Lottie
+                            v-for="cat in cats"
+                            :key="cat.index"
+                            :animationData="cat.url"
+                            autoPlay
+                            loop
+                            v-show="dataUser[0].cat === cat.index"
+                        />
+                    </client-only>
+                </div>
             </div>
+
             <div class="headerUserDropdown">
-                <div class="headerUserDropdownLink headerUserDropdownProfil">
+                <div
+                    class="headerUserDropdownLink headerUserDropdownProfil"
+                    v-if="route.path === '/'"
+                >
                     <div class="headerUserDropdownIcon">
                         <client-only>
                             <font-awesome-icon :icon="['fas', 'gear']" />
                         </client-only>
                     </div>
-                    <div class="headerUserDropdownText">Profil</div>
+                    <div class="headerUserDropdownText">
+                        <nuxt-link to="/profil" @click="dropdownTransition">
+                            Profil
+                        </nuxt-link>
+                    </div>
                 </div>
+
+                <div
+                    class="headerUserDropdownLink headerUserDropdownHome"
+                    v-else
+                >
+                    <div class="headerUserDropdownIcon">
+                        <client-only>
+                            <font-awesome-icon :icon="['fas', 'house']" />
+                        </client-only>
+                    </div>
+                    <div class="headerUserDropdownText">
+                        <nuxt-link to="/" @click="dropdownTransition">
+                            Accueil
+                        </nuxt-link>
+                    </div>
+                </div>
+
                 <div
                     class="headerUserDropdownLink headerUserDropdownSignout"
                     @click="signout"
@@ -90,16 +159,19 @@ $colorRed: #ff5959;
             pointer-events: all;
         }
         &Img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 60px;
             height: 60px;
+            margin-right: 10px;
             border-radius: 50%;
-            background-color: $colorGreen;
         }
         &Name {
-            margin: 0 10px;
+            text-align: center;
         }
         &Button {
-            margin-right: 10px;
+            margin: 0 10px;
         }
         &Dropdown {
             display: flex;
@@ -125,6 +197,9 @@ $colorRed: #ff5959;
                 margin: 0 10px;
             }
             &Profil:hover {
+                background-color: rgba($color: $colorGray, $alpha: 0.9);
+            }
+            &Home:hover {
                 background-color: rgba($color: $colorGray, $alpha: 0.9);
             }
             &Signout:hover {

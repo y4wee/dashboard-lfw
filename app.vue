@@ -1,4 +1,6 @@
 <script setup>
+const route = useRoute();
+
 onBeforeMount(() => {
     initUser();
 });
@@ -6,6 +8,7 @@ onBeforeMount(() => {
 
 <template>
     <div>
+        <Header v-if="route.path !== '/log'" />
         <NuxtPage />
     </div>
 </template>

@@ -11,7 +11,6 @@ const searchBarClearTransition = computed(() => {
 
 <template>
     <div class="home">
-        <Header />
         <FormCandidacy />
         <FormUpdate />
         <div class="searchBar">

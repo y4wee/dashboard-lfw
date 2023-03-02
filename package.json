@@ -19,6 +19,7 @@
   "dependencies": {
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "firebase": "^9.16.0",
-    "gsap": "^3.11.4"
+    "gsap": "^3.11.4",
+    "vue3-lottie": "^2.4.0"
   }
 }

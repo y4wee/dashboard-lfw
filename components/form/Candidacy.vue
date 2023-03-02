@@ -54,7 +54,6 @@ const addCandidacy = () => {
             console.error(err);
         });
 };
-onMounted(() => {});
 </script>
 
 <template>

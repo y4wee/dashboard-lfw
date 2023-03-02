@@ -1,4 +1,4 @@
-import { doc, collection, addDoc, query, getDocs, updateDoc, deleteDoc, onSnapshot } from "firebase/firestore"; 
+import { doc, collection, setDoc, addDoc, query, getDocs, updateDoc, deleteDoc, onSnapshot } from "firebase/firestore"; 
 
 // ajout d'un nouveau doc à la collection
 export const addToCollection = async (candidacy: object) => {
@@ -53,5 +53,46 @@ export const readAllDocs = () => {
       return a.name.localeCompare(b.name);
     })
     dataCandidacy.value = docArray;
+  });
+};
+
+// ajout d'un avatar à la collection user...
+export const addAvatar = async () => {
+  const { $firestore, $auth } = useNuxtApp();
+
+  try {
+      const docRef = await setDoc(doc($firestore, `user${$auth.currentUser.uid}`, "avatar"), {
+        cat: 3,
+        color: "#7ed8b2",
+    });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+};
+
+// modification d'un avatar
+export const updateAvatar = async (avatar: object) => {
+  const { $firestore, $auth } = useNuxtApp();
+  const docRef = doc($firestore, `user${$auth.currentUser.uid}`, "avatar");
+
+  try {
+    await updateDoc(docRef, avatar);
+  } catch (error) {
+    console.error("Error updating document: ", error);
+  }
+};
+
+// lecture de la collection user en temps réel
+export const readAllUserInfo = () => {
+  const { $firestore, $auth } = useNuxtApp();
+  const dataUser = useDataUser();
+
+  const q = query(collection($firestore, `user${$auth.currentUser.uid}`));
+  const unsub = onSnapshot(q, (querySnapshot) => {
+    let userArray: any = [];
+    querySnapshot.forEach((user) => {
+      userArray.push(user.data());
+    });
+    dataUser.value = userArray;
   });
 };

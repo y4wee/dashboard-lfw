@@ -203,8 +203,13 @@ $colorRed: #ff5959;
         box-sizing: border-box;
         background-color: $colorGreen;
         color: white;
-        overflow-x: scroll;
         pointer-events: all;
+        overflow-x: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
     &Card {
         display: flex;
