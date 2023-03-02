@@ -28,11 +28,15 @@ const cats = [
 ];
 
 const dropdownTransition = () => {
+    let listLinks = gsap.utils.toArray(".headerUserLinkContainer");
+
     dropdownOn.value = !dropdownOn.value;
-    gsap.to(".headerUserDropdown", {
-        clipPath: dropdownOn.value ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)",
-        duration: 0.3,
-        ease: "sine.inOut",
+
+    listLinks.forEach((link, index) => {
+        gsap.to(link, {
+            yPercent: dropdownOn.value ? 100 + 100 * index : 0,
+            duration: 0.2 + 0.2 * index,
+        });
     });
 };
 
@@ -70,53 +74,36 @@ const signout = async () => {
                         />
                     </client-only>
                 </div>
-            </div>
-
-            <div class="headerUserDropdown">
-                <div
-                    class="headerUserDropdownLink headerUserDropdownProfil"
-                    v-if="route.path === '/'"
-                >
-                    <div class="headerUserDropdownIcon">
+                <div class="headerUserLinkContainer" v-if="route.path === '/'">
+                    <nuxt-link
+                        to="/profil"
+                        class="headerUserLink headerUserLinkProfil"
+                    >
                         <client-only>
                             <font-awesome-icon :icon="['fas', 'gear']" />
                         </client-only>
-                    </div>
-                    <div class="headerUserDropdownText">
-                        <nuxt-link to="/profil" @click="dropdownTransition">
-                            Profil
-                        </nuxt-link>
-                    </div>
+                    </nuxt-link>
                 </div>
 
-                <div
-                    class="headerUserDropdownLink headerUserDropdownHome"
-                    v-else
-                >
-                    <div class="headerUserDropdownIcon">
+                <div class="headerUserLinkContainer" v-else>
+                    <nuxt-link to="/" class="headerUserLink headerUserLinkHome">
                         <client-only>
                             <font-awesome-icon :icon="['fas', 'house']" />
                         </client-only>
-                    </div>
-                    <div class="headerUserDropdownText">
-                        <nuxt-link to="/" @click="dropdownTransition">
-                            Accueil
-                        </nuxt-link>
-                    </div>
+                    </nuxt-link>
                 </div>
 
-                <div
-                    class="headerUserDropdownLink headerUserDropdownSignout"
-                    @click="signout"
-                >
-                    <div class="headerUserDropdownIcon">
+                <div class="headerUserLinkContainer">
+                    <div
+                        class="headerUserLink headerUserLinkSignout"
+                        @click="signout"
+                    >
                         <client-only>
                             <font-awesome-icon
                                 :icon="['fas', 'right-from-bracket']"
                             />
                         </client-only>
                     </div>
-                    <div class="headerUserDropdownText">Sign Out</div>
                 </div>
             </div>
         </div>
@@ -146,19 +133,19 @@ $colorRed: #ff5959;
     border-bottom: 2px solid white;
     &User {
         display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 0;
-        right: 0;
-        cursor: pointer;
+        justify-content: flex-end;
         pointer-events: none;
         &Container {
+            position: relative;
             display: flex;
             align-items: center;
+            justify-content: flex-end;
             height: 80px;
             pointer-events: all;
+            cursor: pointer;
         }
         &Img {
+            z-index: 51;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -173,37 +160,31 @@ $colorRed: #ff5959;
         &Button {
             margin: 0 10px;
         }
-        &Dropdown {
-            display: flex;
-            flex-direction: column;
-            background-color: rgba($color: $colorContainer, $alpha: 0.9);
-            clip-path: inset(0 0 100% 0);
-            pointer-events: all;
-            &Link {
-                display: flex;
-                align-items: center;
-                height: 80px;
-                width: 100%;
-            }
-            &Icon {
+        &Link {
+            &Container {
+                position: absolute;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 60px;
-                height: 60px;
-                font-size: 1.4rem;
+                width: 80px;
+                height: 80px;
             }
-            &Text {
-                margin: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            text-decoration: none;
+            color: $colorContainer;
+            &Profil {
+                background-color: $colorOrange;
             }
-            &Profil:hover {
-                background-color: rgba($color: $colorGray, $alpha: 0.9);
+            &Home {
+                background-color: $colorGreen;
             }
-            &Home:hover {
-                background-color: rgba($color: $colorGray, $alpha: 0.9);
-            }
-            &Signout:hover {
-                background-color: rgba($color: $colorGray, $alpha: 0.9);
+            &Signout {
+                background-color: $colorRed;
             }
         }
     }
