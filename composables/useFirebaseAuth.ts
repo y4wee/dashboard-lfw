@@ -20,7 +20,6 @@ export const signInUser = async (email: string, password: string): Promise<any> 
     try {
     const userCreds = await signInWithEmailAndPassword($auth, email, password)
         if (userCreds) {
-            addAvatar();
             return userCreds;
         }
     } catch (error: unknown) {
