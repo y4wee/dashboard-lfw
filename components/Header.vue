@@ -47,7 +47,7 @@ const signout = async () => {
 
 <template>
     <header class="header">
-        <div class="headerUser">
+        <div class="headerUser" v-if="dataUser[0]">
             <div class="headerUserContainer" @click="dropdownTransition">
                 <div class="headerUserName">
                     {{ currentUser.name ? currentUser.name : "" }}
@@ -60,7 +60,6 @@ const signout = async () => {
                 </div>
                 <div
                     class="headerUserImg"
-                    v-if="dataUser[0]"
                     :style="{ backgroundColor: dataUser[0].color }"
                 >
                     <client-only>

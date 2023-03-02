@@ -16,21 +16,9 @@ onMounted(() => {});
 </script>
 
 <template>
-    <div class="profil">
+    <div class="profil" v-if="currentUser">
         <ProfilAvatar />
-        <section class="profilInformation">
-            <div class="profilForm">
-                <input
-                    type="text"
-                    v-model="userName"
-                    autocomplete="false"
-                    placeholder="Pseudo"
-                />
-                <div class="profilFormButton" @click="changeUserName">
-                    Enregistrer
-                </div>
-            </div>
-        </section>
+        <ProfilInformation />
     </div>
 </template>
 

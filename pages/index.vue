@@ -1,6 +1,7 @@
 <script setup>
 const utilsBarIndex = useUtilsBarIndex();
 const searchCandidacy = useSearchCandidacy();
+const currentUser = useCurrentUser();
 
 const searchBarClearTransition = computed(() => {
     return searchCandidacy.value.length > 0
@@ -10,7 +11,7 @@ const searchBarClearTransition = computed(() => {
 </script>
 
 <template>
-    <div class="home">
+    <div class="home" v-if="currentUser">
         <FormCandidacy />
         <FormUpdate />
         <div class="searchBar">

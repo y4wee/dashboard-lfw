@@ -84,8 +84,6 @@ onMounted(() => {
         currentCat.value = dataUser.value[0].cat;
         currentColor.value = dataUser.value[0].color;
         catTransition(currentCat.value);
-    } else {
-        catTransition(0);
     }
 });
 </script>
@@ -106,8 +104,13 @@ onMounted(() => {
                         <client-only>
                             <Vue3Lottie
                                 :animationData="cat.url"
-                                autoPlay
                                 loop
+                                :autoPlay="
+                                    cat.index === currentCat ? true : false
+                                "
+                                :pauseAnimation="
+                                    cat.index === currentCat ? false : true
+                                "
                             />
                         </client-only>
                     </div>
