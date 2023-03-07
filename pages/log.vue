@@ -1,4 +1,7 @@
 <script setup>
+import linkedin from "~/assets/lotties/links/linkedin.json";
+import github from "~/assets/lotties/links/github.json";
+
 const signinForm = reactive({
     email: null,
     password: null,
@@ -8,10 +11,11 @@ const registerForm = reactive({
     password: null,
 });
 const logSelected = ref("");
+const logIntroduction = ref(true);
 
 const logSwitch = (e) => {
     let targetData = e.target.dataset.logValue;
-    if (targetData) {
+    if (targetData && !logIntroduction.value) {
         logSelected.value = targetData;
     }
 };
@@ -103,6 +107,46 @@ const signin = async () => {
                 </div>
             </div>
         </div>
+
+        <div class="logIntroduction" v-if="logIntroduction">
+            <h1>LFW</h1>
+            <div class="logIntroductionDetail">
+                Hey Everyone !
+                <br />
+                <br />
+                Here is a tool I created to help you organise and memorize
+                candidacies during your research of the dream's work.
+                <br />
+                <br />
+                That's still in development so be Cool hihi...
+            </div>
+            <div class="logIntroductionLinks">
+                <a
+                    class="logIntroductionLinksGithub"
+                    href="https://github.com/y4wee"
+                    target="_blank"
+                >
+                    <client-only>
+                        <Vue3Lottie :animationData="github" loop />
+                    </client-only>
+                </a>
+                <a
+                    class="logIntroductionLinksLinkedin"
+                    href="https://www.linkedin.com/in/quentin-jambert-4488ab209/"
+                    target="_blank"
+                >
+                    <client-only>
+                        <Vue3Lottie :animationData="linkedin" loop />
+                    </client-only>
+                </a>
+            </div>
+
+            <div class="logIntroductionClose" @click="logIntroduction = false">
+                <client-only>
+                    <font-awesome-icon :icon="['fas', 'xmark']" />
+                </client-only>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -123,6 +167,64 @@ $colorRed: #ff5959;
     gap: 5px;
     background: $colorGray;
     transition: 0.3s ease-in-out;
+    &Introduction {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: calc(100% - 20px);
+        max-width: 500px;
+        border-radius: 20px;
+        background-color: $colorGray;
+        color: $colorBack;
+        transform: translate(-50%, -50%);
+        & h1 {
+            margin: 20px 0;
+            text-decoration: $colorGray line-through 5px;
+        }
+        &Detail {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        &Links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 120px;
+            margin: 20px 0;
+            &Github {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                height: 40px;
+            }
+            &Linkedin {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 55px;
+                height: 55px;
+            }
+        }
+        &Close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            color: $colorRed;
+            cursor: pointer;
+        }
+    }
     &[data-log-selected="connexion"] {
         grid-template-rows: 1.7fr 0.3fr;
         & .logWayConnexion {
